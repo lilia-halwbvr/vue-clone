@@ -1,11 +1,11 @@
 <script setup lang="ts">
-import { platinumSponsors, goldSponsors } from '@/Data.ts'
+import { platinumSponsors, goldSponsors } from '@/data.ts'
 </script>
 <template>
   <section class="table-container">
     <h3>Platinum Sponsors</h3>
       <div class="table-1">
-        <div v-for="(sponsor, index) in platinumSponsors" :key="index" class="table-cell">{{ sponsor }}</div>
+        <div v-for="sponsor in platinumSponsors"  class="table-cell">{{ sponsor }}</div>
       </div>
 
     <h3>Gold Sponsors</h3>
@@ -45,19 +45,40 @@ import { platinumSponsors, goldSponsors } from '@/Data.ts'
   display: grid;
   grid-template-columns: repeat(3, 1fr);
   gap: 4px;
-  margin-bottom: 48px;
+  margin: 1rem 0 2rem;
+
 }
 
 .table-2 {
   display: grid;
   grid-template-columns: repeat(4, 1fr);
   gap: 4px;
-  margin-bottom: 48px;
+  margin: 1rem 0 2rem;
 }
 
 .table-cell:last-child {
   color: gray;
   font-size: 12px;
   font-weight: 400;
+}
+
+@media (max-width: 768px) {
+  .table-1 {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .table-2 {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+
+@media (max-width: 578px) {
+  .table-1 {
+    grid-template-columns: 1fr;
+  }
+
+  .table-2 {
+    grid-template-columns: repeat(2, 1fr);
+  }
 }
 </style>

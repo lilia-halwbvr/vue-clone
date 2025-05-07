@@ -47,6 +47,8 @@
   width: min(90%, 960px);
   word-break: normal;
   text-align: center;
+  color: gray;
+  font-weight: 400;
 }
 
 .hero-buttons {
@@ -96,20 +98,12 @@
   box-sizing: border-box;
 }
 
-.btn-icon-arrow {
-  width: 12px;
-}
-
 .btn-icon-right img {
   transition: transform 0.3s ease;
 }
 
 .btn-icon-right:hover img {
   transform: translateX(2px);
-}
-
-.btn-icon-link {
-  width: 12px;
 }
 
 .btn:not(.btn-green):hover {
@@ -128,6 +122,27 @@
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   font-weight: 900;
+}
 
+.btn-icon-right svg {
+  transition: transform 0.3s ease;
+}
+
+.btn-icon-right:hover svg {
+  transform: translateX(2px);
+}
+
+@media (max-width: 811px) {
+  .btn:nth-child(4) {
+    margin-top: 18px;
+  }
+}
+
+@media (max-width: 578px) {
+  .btn:nth-child(1),
+  .btn:nth-child(2),
+  .btn:nth-child(3) {
+    margin: 18px 18px 0 0;
+  }
 }
 </style>

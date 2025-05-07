@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { characteristics } from '@/Data.ts'
+import { characteristics } from '@/data.ts'
 </script>
 <template>
   <section class="special-sponsor">
@@ -31,8 +31,8 @@ import { characteristics } from '@/Data.ts'
 
 <style scoped>
 .special-sponsor {
-  border-top: 1px solid lightgray;
-  border-bottom: 1px solid lightgray;
+  border-top: 1px solid #eeeeee;
+  border-bottom: 1px solid #eeeeee;
   padding: 12px 24px;
   display: flex;
   align-items: center;
@@ -67,6 +67,19 @@ import { characteristics } from '@/Data.ts'
 
 .char-item {
   padding: 28px 36px;
+}
+
+@media (max-width: 768px) {
+  .char-container {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+}
+
+@media (max-width: 578px) {
+  .special-sponsor {
+    flex-direction: column;
+  }
 }
 </style>
 
