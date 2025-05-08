@@ -1,5 +1,5 @@
 <script setup lang="ts">
-
+import { RouterLink } from 'vue-router'
 
 </script>
 
@@ -45,7 +45,7 @@
                 <li><a href="#">Migration from Vue 2</a></li>
               </ul>
             </li>
-            <li><a href="#">API</a></li>
+            <li><RouterLink to="/api">API</RouterLink></li>
             <li><a href="#">Playground</a></li>
             <li class="dropdown">
               <a href="#">Ecosystem</a>
