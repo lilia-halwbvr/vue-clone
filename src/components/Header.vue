@@ -1,5 +1,16 @@
 <script setup lang="ts">
+import { ref } from 'vue'
 
+const isPopupOpen = ref(false)
+
+function togglePopup() {
+  isPopupOpen.value = !isPopupOpen.value
+}
+
+const isDocsOpen = ref(false)
+const isEcosystemOpen = ref(false)
+const isAboutOpen = ref(false)
+const isExpertsOpen = ref(false)
 
 </script>
 
@@ -129,9 +140,131 @@
           </button>
         </div>
       </div>
-      <button class="menu-btn">
+      <button class="menu-btn" @click="togglePopup">
         <img class="menu-img" src="./icons/menu-sm.svg" alt="menu toggle button"/>
       </button>
+
+
+
+
+      <div class="popup-menu" v-show="isPopupOpen">
+        <div class="popup-content">
+          <nav>
+            <ul class="nav-menu">
+              <li class="dropdown">
+                <div class="dropdown-header" @click="isDocsOpen = !isDocsOpen">
+                  <a href="#" >Docs</a>
+                  <button class="popup-open-menu">&times;</button>
+                </div>
+                <ul class="popup-dropdown-menu" :class="{ open: isDocsOpen }">
+                  <li><a href="#">Guide</a></li>
+                  <li><a href="#">Tutorial</a></li>
+                  <li><a href="#">Examples</a></li>
+                  <li><a href="#">Quick start</a></li>
+                  <li><a href="#">Glossary</a></li>
+                  <li><a href="#">Error reference</a></li>
+                  <li><a href="#">Vue 2 docs</a></li>
+                  <li><a href="#">Migration from Vue 2</a></li>
+                </ul>
+              </li>
+
+              <li><a href="#">API</a></li>
+              <li><a href="#">Playground</a></li>
+
+              <li class="dropdown">
+                <div class="dropdown-header" @click="isEcosystemOpen = !isEcosystemOpen">
+                  <a href="#">Ecosystem</a>
+                  <button class="popup-open-menu">&times;</button>
+                </div>
+                <ul class="popup-dropdown-menu" :class="{ open: isEcosystemOpen }">
+                  <li><strong>RESOURCES</strong></li>
+                  <li><a href="#">Partners</a></li>
+                  <li><a href="#">Developers</a></li>
+                  <li><a href="#">Themes</a></li>
+                  <li><a href="#">UI components</a></li>
+                  <li><a href="#">Certification</a></li>
+                  <li><a href="#">Jobs</a></li>
+                  <li><a href="#">T-Shirt shop</a></li>
+
+                  <li><strong>OFFICIAL LIBRARIES</strong></li>
+                  <li><a href="#">Vue Router</a></li>
+                  <li><a href="#">Pinia</a></li>
+                  <li><a href="#">Tooling Guide</a></li>
+
+                  <li><strong>VIDEO COURSES</strong></li>
+                  <li><a href="#">Vue Mastery</a></li>
+                  <li><a href="#">Vue School</a></li>
+
+                  <li><strong>HELP</strong></li>
+                  <li><a href="#">Discord chat</a></li>
+                  <li><a href="#">GitHub discussions</a></li>
+                  <li><a href="#">DEV community</a></li>
+
+                  <li><strong>NEWS</strong></li>
+                  <li><a href="#">Blog</a></li>
+                  <li><a href="#">Twitter</a></li>
+                  <li><a href="#">Events</a></li>
+                  <li><a href="#">Newsletters</a></li>
+                </ul>
+              </li>
+
+              <li class="dropdown">
+                <div class="dropdown-header" @click="isAboutOpen =! isAboutOpen">
+                  <a href="#" >About</a>
+                  <button class="popup-open-menu">&times;</button>
+                </div>
+                <ul class="popup-dropdown-menu" :class="{ open: isAboutOpen }">
+                  <li><a href="#">FAQ</a></li>
+                  <li><a href="#">Team</a></li>
+                  <li><a href="#">Releases</a></li>
+                  <li><a href="#">Community guide</a></li>
+                  <li><a href="#">Code of conduct</a></li>
+                  <li><a href="#">Privacy policy</a></li>
+                  <li><a href="#">The documentary</a></li>
+                </ul>
+              </li>
+
+              <li><a href="#" >Sponsor</a></li>
+
+              <li class="dropdown">
+                <div class="dropdown-header" @click="isExpertsOpen =! isExpertsOpen">
+                  <a href="#" >Experts</a>
+                  <button class="popup-open-menu">&times;</button>
+                </div>
+                <ul class="popup-dropdown-menu" :class="{ open: isExpertsOpen }">
+                  <li><a href="#">Partners</a></li>
+                  <li><a href="#">Developers</a></li>
+                </ul>
+              </li>
+            </ul>
+          </nav>
+          <div class="popup-bg">
+            <span class="translations">Translations</span>
+            <ul class="translation-list">
+              <li>
+                <a href="#">Italiano</a>
+                <img src="./icons/gith.svg" alt="github">
+              </li>
+              <li>
+                <a href="#">English</a>
+                <img src="./icons/gith.svg" alt="github">
+              </li>
+            </ul>
+            <span>Help us translate!</span>
+          </div>
+          <div class="buttons">
+            <button class="btn header-btns">
+              <img src="./icons/gith.svg" alt="github" />
+            </button>
+            <button class="btn header-btns">
+              <img src="./icons/x.svg" alt="twitter" />
+            </button>
+            <button class="btn header-btns">
+              <img src="./icons/disc.svg" alt="discord" />
+            </button>
+          </div>
+        </div>
+      </div>
     </div>
   </header>
 </template>
@@ -145,7 +278,6 @@
   justify-content: space-between;
   border-bottom: 1px solid #eeeeee;
 }
-
 
 .header-left {
   display: flex;
@@ -210,7 +342,7 @@
   color: #213547;
 }
 .nav-menu li:last-child {
-  margin-right: 0px;
+  margin-right: 0;
 
 }
 .nav-menu a {
@@ -228,8 +360,7 @@
 }
 .header-btns {
   width: 20px;
-  padding: 5px;
-  margin-left: 10px;
+
   opacity: 0.7;
   border: none;
   background: none;
@@ -252,11 +383,10 @@
 }
 .dropdown {
   position: relative;
-  padding: 12px 0;
 }
 
 .dropdown-menu {
-  padding: 10px 0;
+  padding: 0.5rem 0;
   position: absolute;
   top: 100%;
   right: 0;
@@ -306,7 +436,88 @@
   background: none;
   border: none;
 }
+
+.popup-menu {
+  display: flex;
+  position: fixed;
+  top: 55px;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgb(255, 255, 255);
+  z-index: 1000;
+  align-items: flex-start;
+  justify-content: center;
+  padding: 0 32px;
+  overflow-y: auto;
+}
+
+.popup-content {
+  background-color: #fff;
+  width: 40%;
+  position: relative;
+  margin: 0;
+  padding: 24px 0 96px;
+  max-width: 288px;
+}
+
+.popup-open-menu {
+  transform: rotate(45deg);
+  cursor: pointer;
+  margin: auto 0 auto auto;
+  background: none;
+  border: none;
+}
+
+.popup-bg {
+  border-radius: 8px;
+  padding: 12px 14px 12px 16px;
+  background-color: #f9f9f9;
+  color: rgba(60, 60, 60, .7);
+  line-height: 24px;
+  font-size: 12px;
+  font-weight: 500;
+  margin: 16px auto;
+}
+
+.popup-dropdown-menu {
+  display: none;
+  flex-direction: column;
+  box-shadow: none;
+  border-radius: 0;
+  transition: opacity .25s, visibility .25s;
+  margin: 15px auto 15px 15px;
+}
+
+.popup-dropdown-menu.open {
+  display: flex;
+}
+
+.popup-bg li {
+  list-style: none;
+  display: flex;
+  justify-content: space-between;
+  margin: 5px 0;
+}
+
+.dropdown-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+}
+.buttons {
+  display: flex;
+  justify-content: center;
+  gap: 0.5rem;
+  padding: 0 0.5rem;
+}
+
+
 @media (max-width: 1024px) {
+  ul {
+    padding: 0;
+  }
   .navigation,
   .search-button {
     display: none;
@@ -314,6 +525,66 @@
   .menu-btn{
     display: block;
     width: 16px;
+
+  }
+  .nav-menu {
+    list-style: none;
+    display: flex;
+    align-items: flex-start;
+    justify-content: center;
+    flex-direction: column;
+    gap: 0;
+  }
+  .nav-menu li {
+    width: 100%;
+  }
+
+  .nav-menu > li {
+    border-bottom: 1px solid rgba(211, 211, 211, 0.61);
+    padding: 0.7rem 0;
+    margin: 0;
+  }
+  .translations {
+    border-bottom: 1px solid rgba(211, 211, 211, 0.61);
+    display: inline-block;
+    width: 100%;
+  }
+  .header-btns img {
+    width: 16px;
+    height: 16px;
+  }
+  .popup-bg a,
+  .popup-bg span:last-of-type {
+    color: #213547;
+  }
+  .popup-bg span:last-of-type {
+    border-top:  1px solid rgba(211, 211, 211, 0.61);
+    display: inline-block;
+    width: 100%;
+  }
+  .translation-list {
+    padding: 10px 0;
+  }
+  .dropdown {
+    display: flex;
+    flex-direction: column;
+
+  }
+  .nav-menu li {
+    align-items: flex-start;
+
+  }
+  .popup-dropdown-menu li a {
+    font-size: 13px;
+    line-height: 32px;
+  }
+  .popup-dropdown-menu li strong {
+    line-height: 32px;
+    font-size: 11px;
+    font-weight: 700;
+    color: lightgray;
+    text-transform: uppercase;
+    transition: color .25s;
   }
 }
 </style>
