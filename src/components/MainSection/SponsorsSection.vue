@@ -4,9 +4,9 @@ import { platinumSponsors, goldSponsors } from '@/data.ts'
 <template>
   <section class="table-container">
     <h3>Platinum Sponsors</h3>
-      <div class="table-1">
-        <div v-for="sponsor in platinumSponsors"  class="table-cell">{{ sponsor }}</div>
-      </div>
+    <div class="table-1">
+      <div v-for="(sponsor, index) in platinumSponsors" :key="index" class="table-cell">{{ sponsor }}</div>
+    </div>
 
     <h3>Gold Sponsors</h3>
     <div class="table-2">
