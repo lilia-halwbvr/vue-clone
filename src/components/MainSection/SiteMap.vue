@@ -19,7 +19,7 @@ import { siteMapCategories } from '@/data.js'
 <style scoped>
 .map {
   width: 100%;
-  background:rgba(228, 228, 228, 0.226);
+  background: var(--secondary-bg-color);
 }
 
 .map-links {

@@ -31,8 +31,8 @@ import { characteristics } from '@/data.ts'
 
 <style scoped>
 .special-sponsor {
-  border-top: 1px solid #eeeeee;
-  border-bottom: 1px solid #eeeeee;
+  border-top: 1px solid var(--border-color);
+  border-bottom: 1px solid var(--border-color);
   padding: 12px 24px;
   display: flex;
   align-items: center;
@@ -43,6 +43,9 @@ import { characteristics } from '@/data.ts'
   width: 168px;
   height: 42px;
   margin: 0 10px;
+}
+:root:has(option[id="theme-system"]:checked) .image-container {
+  filter: grayscale(1) invert(1);
 }
 
 .text {
@@ -61,8 +64,8 @@ import { characteristics } from '@/data.ts'
 }
 
 .char-p {
-  margin: 0;
-  color: #adadad;
+  margin: 10px 0;
+  color: #7a7a7a;
 }
 
 .char-item {

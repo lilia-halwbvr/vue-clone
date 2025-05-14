@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { ref } from 'vue'
+import { ref, onMounted } from 'vue'
 
 const isPopupOpen = ref(false)
 
@@ -12,6 +12,16 @@ const isEcosystemOpen = ref(false)
 const isAboutOpen = ref(false)
 const isExpertsOpen = ref(false)
 
+const selectedTheme = ref('system')
+onMounted(() => {
+  const savedTheme = localStorage.getItem('preferred-theme')
+  if(savedTheme){
+    selectedTheme.value = savedTheme
+  }
+})
+function saveTheme() {
+  localStorage.setItem('preferred-theme', selectedTheme.value)
+}
 </script>
 
 <template>
@@ -44,7 +54,9 @@ const isExpertsOpen = ref(false)
           <ul class="nav-menu">
             <li class="dropdown">
               <a href="#">Docs</a>
-              <img class="nav-icon" src="./icons/arrow.svg" alt="Arrow">
+              <svg class="nav-icon" width="14" height="9" viewBox="0 0 14 9" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path d="M1 1L7 7L13 1" stroke="currentColor" stroke-width="2"/>
+              </svg>
               <ul class="dropdown-menu">
                 <li><a href="#">Guide</a></li>
                 <li><a href="#">Tutorial</a></li>
@@ -60,7 +72,9 @@ const isExpertsOpen = ref(false)
             <li><a href="#">Playground</a></li>
             <li class="dropdown">
               <a href="#">Ecosystem</a>
-              <img class="nav-icon" src="./icons/arrow.svg" alt="Arrow">
+              <svg class="nav-icon" width="14" height="9" viewBox="0 0 14 9" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path d="M1 1L7 7L13 1" stroke="currentColor" stroke-width="2"/>
+              </svg>
               <ul class="dropdown-menu">
                 <li><strong>RESOURCES</strong></li>
                 <li><a href="#">Partners</a></li>
@@ -90,7 +104,9 @@ const isExpertsOpen = ref(false)
             </li>
             <li class="dropdown">
               <a href="#">About</a>
-              <img class="nav-icon" src="./icons/arrow.svg" alt="Arrow">
+              <svg class="nav-icon" width="14" height="9" viewBox="0 0 14 9" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path d="M1 1L7 7L13 1" stroke="currentColor" stroke-width="2"/>
+              </svg>
               <ul class="dropdown-menu">
                 <li><a href="#">FAQ</a></li>
                 <li><a href="#">Team</a></li>
@@ -105,7 +121,9 @@ const isExpertsOpen = ref(false)
             <li class="dropdown">
               <a href="#">Experts</a>
               <span class="new-p">NEW</span>
-              <img class="nav-icon" src="./icons/arrow.svg" alt="Arrow">
+              <svg class="nav-icon" width="14" height="9" viewBox="0 0 14 9" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path d="M1 1L7 7L13 1" stroke="currentColor" stroke-width="2"/>
+              </svg>
               <ul class="dropdown-menu">
                 <li><a href="#">Partners</a></li>
                 <li><a href="#">Developers</a></li>
@@ -122,7 +140,7 @@ const isExpertsOpen = ref(false)
           </svg>
         </button>
 
-        <select id="theme-select">
+        <select id="theme-select" @change="saveTheme">
           <option id="theme-system" value="system">System</option>
           <option id="theme-light" value="light">Light</option>
           <option id="theme-dark" value="dark">Dark</option>
@@ -143,9 +161,6 @@ const isExpertsOpen = ref(false)
       <button class="menu-btn" @click="togglePopup">
         <img class="menu-img" src="./icons/menu-sm.svg" alt="menu toggle button"/>
       </button>
-
-
-
 
       <div class="popup-menu" v-show="isPopupOpen">
         <div class="popup-content">
@@ -273,10 +288,10 @@ const isExpertsOpen = ref(false)
 .header {
   width: min(100%, 1500px);
   margin: 0 auto;
-  padding: 10px 32px;
+  padding: 15px 32px;
   display: flex;
   justify-content: space-between;
-  border-bottom: 1px solid #eeeeee;
+  border-bottom: 1px solid var(--border-color);
 }
 
 .header-left {
@@ -339,17 +354,17 @@ const isExpertsOpen = ref(false)
   display: flex;
   align-items: center;
   cursor:pointer;
-  color: #213547;
+  color: var(--header-buttons);
 }
 .nav-menu li:last-child {
   margin-right: 0;
-
 }
 .nav-menu a {
   text-decoration: none;
   transition: color 0.3s ease-in-out;
-  color: #213547;
+  color: var(--header-buttons);
 }
+
 .new-p {
   background-color: rgba(59, 142, 237, 1);
   color: white;
@@ -358,9 +373,9 @@ const isExpertsOpen = ref(false)
   font-size: 10px;
   margin-left: 6px;
 }
+
 .header-btns {
   width: 20px;
-
   opacity: 0.7;
   border: none;
   background: none;
@@ -371,15 +386,21 @@ const isExpertsOpen = ref(false)
   width: 20px;
   height: 20px;
 }
+
 .nav-icon {
   width: 14px;
   padding-left: 4px;
+  color: var(--header-buttons);
 }
+
 .header-translation-btn {
   background: none;
   border: none;
+  border-right: 1px solid var(--border-color);
+  border-left: 1px solid var(--border-color);
+  margin: 0 8px;
   padding: 0 10px;
-  cursor: pointer;
+  color: light-dark(black, #d5d5d5);
 }
 .dropdown {
   position: relative;
@@ -390,7 +411,7 @@ const isExpertsOpen = ref(false)
   position: absolute;
   top: 100%;
   right: 0;
-  background: white;
+  background: var(--bg);
   box-shadow: 0 4px 6px rgba(0, 0, 0, 0.25);
   border-radius: 8px;
   min-width: 180px;
@@ -420,7 +441,7 @@ const isExpertsOpen = ref(false)
   font-size: 13px;
   display: block;
   width: 100%;
-  color: rgba(33, 53, 71, 1);
+  color: var(--header-buttons);
   text-decoration: none;
 }
 
@@ -444,7 +465,7 @@ const isExpertsOpen = ref(false)
   left: 0;
   width: 100%;
   height: 100%;
-  background-color: rgb(255, 255, 255);
+  background-color: var(--bg);
   z-index: 1000;
   align-items: flex-start;
   justify-content: center;
@@ -453,7 +474,7 @@ const isExpertsOpen = ref(false)
 }
 
 .popup-content {
-  background-color: #fff;
+  background-color: var(--bg);
   width: 40%;
   position: relative;
   margin: 0;
@@ -472,8 +493,8 @@ const isExpertsOpen = ref(false)
 .popup-bg {
   border-radius: 8px;
   padding: 12px 14px 12px 16px;
-  background-color: #f9f9f9;
-  color: rgba(60, 60, 60, .7);
+  background-color: var(--table-cell-color);
+  color: var(--text-color);
   line-height: 24px;
   font-size: 12px;
   font-weight: 500;
@@ -509,7 +530,7 @@ const isExpertsOpen = ref(false)
 .buttons {
   display: flex;
   justify-content: center;
-  gap: 0.5rem;
+  gap: 0.9rem;
   padding: 0 0.5rem;
 }
 
@@ -540,12 +561,12 @@ const isExpertsOpen = ref(false)
   }
 
   .nav-menu > li {
-    border-bottom: 1px solid rgba(211, 211, 211, 0.61);
+    border-bottom: 1px solid var(--border-color);
     padding: 0.7rem 0;
     margin: 0;
   }
   .translations {
-    border-bottom: 1px solid rgba(211, 211, 211, 0.61);
+    border-bottom: 1px solid var(--border-color);
     display: inline-block;
     width: 100%;
   }
@@ -555,10 +576,10 @@ const isExpertsOpen = ref(false)
   }
   .popup-bg a,
   .popup-bg span:last-of-type {
-    color: #213547;
+    color: var(--button-text-color);
   }
   .popup-bg span:last-of-type {
-    border-top:  1px solid rgba(211, 211, 211, 0.61);
+    border-top:  1px solid var(--border-color);
     display: inline-block;
     width: 100%;
   }
@@ -568,7 +589,6 @@ const isExpertsOpen = ref(false)
   .dropdown {
     display: flex;
     flex-direction: column;
-
   }
   .nav-menu li {
     align-items: flex-start;

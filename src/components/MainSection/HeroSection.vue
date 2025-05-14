@@ -69,8 +69,9 @@
   border: none;
   cursor: pointer;
   margin-right: 18px;
-  color: rgba(71, 101, 130, 1);
+  color: var(--button-text-color);
   white-space: nowrap;
+  background-color: var(--secondary-bg-color);
 }
 
 .btn:last-child {
@@ -79,23 +80,22 @@
 
 .btn-green {
   background-color: rgba(66, 184, 131, 1);
-  color: white;
+  color: light-dark(white, var(--light-text));
 }
 
 .btn-green:hover {
   background-color: #2d8867;
 }
 
+:root:has(option[id="theme-system"]:checked) .btn:not(.btn-green):hover,
+:root:has(option[id="theme-dark"]:checked) .btn:not(.btn-green):hover{
+  background-color: rgba(70, 70, 70, 0.66);
+}
+
 .btn-gradient {
-  background: radial-gradient(circle at 100% 100%, #f1f1f1 0, #f1f1f1 6px, transparent 6px) 0% 0%/8px 8px no-repeat,
-  radial-gradient(circle at 0 100%, #f1f1f1 0, #f1f1f1 6px, transparent 6px) 100% 0%/8px 8px no-repeat,
-  radial-gradient(circle at 100% 0, #f1f1f1 0, #f1f1f1 6px, transparent 6px) 0% 100%/8px 8px no-repeat,
-  radial-gradient(circle at 0 0, #f1f1f1 0, #f1f1f1 6px, transparent 6px) 100% 100%/8px 8px no-repeat,
-  linear-gradient(#f1f1f1, #f1f1f1) 50% 50%/calc(100% - 4px) calc(100% - 16px) no-repeat,
-  linear-gradient(#f1f1f1, #f1f1f1) 50% 50%/calc(100% - 16px) calc(100% - 4px) no-repeat,
-  linear-gradient(146deg, #45cf98 0%, #6481fb 100%);
-  border-radius: 8px;
-  box-sizing: border-box;
+  background: linear-gradient(var(--button-linear), var(--button-linear)) padding-box,
+  linear-gradient(45deg, #42d392, #647eff) border-box;
+  border: 2px solid transparent;
 }
 
 .btn-icon-right img {
