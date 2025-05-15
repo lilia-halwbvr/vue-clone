@@ -6,6 +6,7 @@ import HeroSection from '@/components/MainSection/HeroSection.vue'
 import SiteMap from '@/components/MainSection/SiteMap.vue'
 import SpecialSponsor from '@/components/MainSection/SpecialSponsor.vue'
 import SponsorsSection from '@/components/MainSection/SponsorsSection.vue'
+import Assignments from '@/components/MainSection/Assignments.vue'
 </script>
 
 <template>
@@ -15,7 +16,7 @@ import SponsorsSection from '@/components/MainSection/SponsorsSection.vue'
     <SpecialSponsor />
     <SponsorsSection />
     <SiteMap />
-
+    <Assignments />
   <Footer />
 </template>
 
