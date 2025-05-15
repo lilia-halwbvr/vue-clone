@@ -3,10 +3,11 @@ import { ref, computed } from 'vue'
 import AssignmentList from './AssignmentList.vue'
 
 const assignments = ref([
-  { id: 1, name: 'Finish project', complete: false },
-  { id: 2, name: "Don't die", complete: false },
-  { id: 3, name: 'Learn Vue', complete: false }
+  { id: 1, name: 'Finish project', description: 'Main client task', complete: false },
+  { id: 2, name: "Don't die", description: 'Remember to breathe', complete: false },
+  { id: 3, name: 'Learn Vue', description: 'Study Composition API', complete: false }
 ])
+
 const completedAssignments = computed(() => {
   return assignments.value.filter(a => a.complete)
 })
@@ -15,6 +16,7 @@ const inProgressAssignments = computed(() => {
 })
 
 const newAssignment = ref('')
+const newDescription = ref('')
 
 function addAssignment() {
   if (!newAssignment.value.trim()) return
@@ -22,23 +24,31 @@ function addAssignment() {
   assignments.value.push({
     id: assignments.value.length + 1,
     name: newAssignment.value,
+    description: newDescription.value,
     complete: false,
   })
   newAssignment.value = ''
+  newDescription.value = ''
+}
+
+function deleteAssignment(id: number){
+  assignments.value = assignments.value.filter(a => a.id != id)
 }
 </script>
 
 <template>
   <div class="assignments-wrapper">
-    <assignment-list :assignments="inProgressAssignments" title="In Progress" />
+    <assignment-list :assignments="inProgressAssignments" title="In Progress" @delete="deleteAssignment" />
 
     <form @submit.prevent="addAssignment" class="add-form">
-      <input v-model="newAssignment" placeholder="New assignment..." />
+      <div class="forms">
+        <input v-model="newAssignment" placeholder="New assignment..." />
+        <input v-model="newDescription" placeholder="Task description..." />
+      </div>
       <button type="submit">Add</button>
     </form>
   </div>
     <assignment-list :assignments="completedAssignments" title="Completed" class="completed-list" />
-
 </template>
 
 <style scoped>
@@ -65,12 +75,20 @@ function addAssignment() {
   box-sizing: border-box;
 }
 
+.forms {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  flex-grow: 1;
+}
+
 .add-form input {
   flex-grow: 1;
   padding: 0.5rem;
   border-radius: 8px;
   border: none;
   font-size: 1rem;
+  color: gray;
 }
 
 .add-form button {
@@ -83,6 +101,7 @@ function addAssignment() {
   cursor: pointer;
   transition: background-color 0.3s ease;
   flex-shrink: 0;
+  width: 20%;
 }
 
 .add-form button:hover {

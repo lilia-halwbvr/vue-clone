@@ -7,6 +7,7 @@
         :key="assignment.id"
         class="assignment-item"
         :assignment="assignment"
+        @delete="$emit('delete', $event)"
       ></assignment>
     </ul>
   </div>
@@ -18,6 +19,9 @@ import Assignment from './Assignment.vue'
 const props = defineProps<{
   assignments: { id: number; name: string; complete: boolean }[];
   title: string;
+}>()
+const emit = defineEmits<{
+  (e: 'delete', id: number): void
 }>()
 </script>
 
@@ -61,9 +65,8 @@ const props = defineProps<{
 
 .assignment-item:hover {
   background-color: rgba(92, 125, 60, 0.72);
-  color: #333;
-}
 
+}
 
 </style>
 
